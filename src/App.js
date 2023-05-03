@@ -2,6 +2,7 @@
 import './App.css';
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 import HomeViewModel from './viewmodels/HomeViewModel'
+import NewObjectiveViewModel from './viewmodels/NewObjectiveViewModel'
 import Home from './views/Home';
 import NewObjective from "./views/NewObjetive";
 import EditObjective from "./views/EditObjetive";
@@ -12,6 +13,7 @@ import NoMatch from "./views/NoMatch";
 
 function App() {
   const { date, festivos} = HomeViewModel();
+  const{time, handleTimeChange}= NewObjectiveViewModel();
 
   return (
     <div className="App">
@@ -20,7 +22,7 @@ function App() {
           <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home date={date} festivos={festivos}/>} />
-          <Route path="/new-objective" element={<NewObjective />} />
+          <Route path="/new-objective" element={<NewObjective time={time} handleTimeChange={handleTimeChange}/>} />
           <Route path="/edit-objective/:id" element={<EditObjective />} />
           <Route path="/delete-objective/:id" element={<DeleteObjective />} />
           <Route path="/show-objective/:id" element={<ShowObjective />} />

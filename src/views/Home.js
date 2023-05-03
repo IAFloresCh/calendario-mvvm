@@ -1,27 +1,22 @@
-import {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import Festivo from "../models/Festivos";
 
-function Home (){
-    const [time, setTime] = useState('');
-    const date = new Date();
-
-    //useEffect to get a current date and time
-    useEffect(() => {
-        const interval = setInterval(() => {
-            const now = new Date();
-            setTime(now.toLocaleTimeString());
-
-        }, 1000);
-        return () => clearInterval(interval);
-    }, []);
-
+function Home({ date, festivos }) {
+    console.log(festivos);
     
-
-
     return (
         <div>
-        <h2>Home</h2>
-        {date.toLocaleDateString()}<br/>
-        {time}
+            <h2>Home</h2>
+            {date}<br />
+            {festivos.map((festivo) => (
+                <div key={festivo.id}>
+                    {festivo.date} - {festivo.name}
+                </div>
+
+
+            ))}
+
+
         </div>
     );
 }

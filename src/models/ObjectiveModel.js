@@ -1,5 +1,6 @@
 export default class ObjectiveModel {
     constructor() {
+      this.id = 0;
       this.name = '';
       this.description = '';
       this.lunes = 0;
@@ -15,6 +16,7 @@ export default class ObjectiveModel {
     }
 
     setNewObjective = (model) => {
+      this.id = model.id;
       this.name = model.name;
       this.description = model.description;
       this.lunes = model.lunes;

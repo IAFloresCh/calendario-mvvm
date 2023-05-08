@@ -19,9 +19,16 @@ import ObjectiveModel from "../models/ObjectiveModel";
     useEffect(() => {
       if (path === '/delete-objective' && params.id) {
         const getObjective = async () => {
-          const response = await axios.delete(urlBase + "/" + params.id);
-          setModel(response.data.objective);
-          console.log("respuesta desde delete VM" + response.data.objective);
+          //const response = await axios.delete(urlBase + "/" + params.id);
+          //setModel(response.data.objective);
+          //onsole.log("respuesta desde delete VM" + response.data.objective);
+            const objectives = localStorage.getItem("objectives") ? JSON.parse(localStorage.getItem("objectives")) : [] ;
+            const objective = objectives.find((objective) => objective.id === Number(params.id));
+            const index = objectives.indexOf(objective);
+            objectives.splice(index, 1);
+            localStorage.setItem("objectives", JSON.stringify(objectives));
+            setModel(objective);
+            
           navigate('/');
         };
         getObjective();

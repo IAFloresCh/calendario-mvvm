@@ -25,9 +25,13 @@ function useEditObjectiveViewModel() {
   useEffect(() => {
     if (path === "/edit-objective" && params.id) {
       const getObjective = async () => {
-        const response = await axios.get(urlBase + "/" + params.id);
-        setModel(response.data.objective);
-        console.log("respuesta desde home VM" + response.data.objective);
+        //const response = await axios.get(urlBase + "/" + params.id);
+        //setModel(response.data.objective);
+        //console.log("respuesta desde home VM" + response.data.objective);
+        const objectives = localStorage.getItem("objectives") ? JSON.parse(localStorage.getItem("objectives")) : [] ;
+        const objective = objectives.find((objective) => objective.id === params.id);
+        setModel(objective);
+        
       };
       getObjective();
     }
@@ -76,8 +80,14 @@ function useEditObjectiveViewModel() {
   //handle submit post the data to the API using  axios
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.put(urlBase + "/" + model.id, model);
-    console.log(response);
+    //const response = await axios.put(urlBase + "/" + model.id, model);
+    //console.log(response);
+    const objectives = localStorage.getItem("objectives") ? JSON.parse(localStorage.getItem("objectives")) : [] ;
+    const objective = objectives.find((objective) => objective.id === model.id);
+    const index = objectives.indexOf(objective);
+    objectives.splice(index, 1, model);
+    localStorage.setItem("objectives", JSON.stringify(objectives));
+    
     navigate("/");
   };
 

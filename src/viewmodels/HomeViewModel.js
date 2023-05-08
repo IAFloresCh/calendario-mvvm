@@ -38,9 +38,11 @@ function useHomeViewModel() {
   // get data objectives from API using axios
   useEffect(() => {
     const getObjectives = async () => {
-      const response = await axios.get(urlBaseObjectives);
-      setModels(response.data.objectives);
-      console.log(response.data.objectives);
+      //const response = await axios.get(urlBaseObjectives);
+      //setModels(response.data.objectives);
+      //console.log(response.data.objectives);
+      const objectives = localStorage.getItem("objectives") ? JSON.parse(localStorage.getItem("objectives")) : [] ;
+      setModels(objectives);
     };
     getObjectives();
   }, []);

@@ -21,9 +21,13 @@ function useShowObjectiveViewModel() {
   useEffect(() => {
     if (path === "/show-objective" && params.id) {
       const getObjective = async () => {
-        const response = await axios.get(urlBase + "/" + params.id);
-        setModel(response.data.objective);
-        console.log("respuesta desde show VM" + response.data.objective);
+        //const response = await axios.get(urlBase + "/" + params.id);
+        //setModel(response.data.objective);
+        //console.log("respuesta desde show VM" + response.data.objective);
+        const objectives = localStorage.getItem("objectives") ? JSON.parse(localStorage.getItem("objectives")) : [] ;
+        const objective = objectives.find((objective) => objective.id === params.id);
+        setModel(objective);
+
       };
       getObjective();
     }

@@ -4,7 +4,7 @@ import { useEditObjectiveViewModel } from "../viewmodels/EditObjectiveViewModel"
 
 
 
-function EditObjective({ }) {
+function EditObjective() {
   const { model, handleChange, handleSubmit,onAddBtnClick,onRemoveBtnClick,inputList,incidenciasList } = useEditObjectiveViewModel();
   const lt = ['Introduce tu nombre',"Introduce una descripción", "Introduce el total de horas", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", "Fecha de inicio"];
 
@@ -27,8 +27,10 @@ function EditObjective({ }) {
         <Inputs type="number" name={"domingo"} label={lt[9]}  onChange={handleChange} value={model.domingo} />
         <Inputs type="date" name={"fechaInicio"} label={lt[10]}  onChange={handleChange} value={model.fechaInicio} />
         </fieldset>
+        <button type="button" onClick={onAddBtnClick} >Añadir Incidencia</button>
+        <button type="button" onClick={onRemoveBtnClick} >Eliminar Incidencia</button>
         <fieldset >
-          {incidenciasList}
+          {inputList}
         </fieldset>
         <button type="button" onClick={handleSubmit} >Guardar</button>
       </form>

@@ -5,6 +5,7 @@ import { useShowObjectiveViewModel } from "../viewmodels/ShowObjectiveViewModel"
 function ShowObjetive() {
   const {model,final} = useShowObjectiveViewModel();
   console.log("final desde show" + final);
+  console.log("log desde show objective" + model);
  
   return (
     <div>

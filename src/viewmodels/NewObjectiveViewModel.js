@@ -41,6 +41,7 @@ function useNewObjectiveViewModel() {
 
     setIncidencias(newIncidencia);
     setModel(newModel);
+
   };
 
   const handleChange = (e) => {
@@ -79,6 +80,7 @@ function useNewObjectiveViewModel() {
     inputList,
     onAddBtnClick,
     onRemoveBtnClick,
+    
   };
 }
 

@@ -31,7 +31,20 @@ function useEditObjectiveViewModel() {
         const objectives = localStorage.getItem("objectives") ? JSON.parse(localStorage.getItem("objectives")) : [] ;
         const objective = objectives.find((objective) => objective.id === params.id);
         setModel(objective);
-        
+        setIncidencias(objective.incidencias); 
+        const inputIncidenciasList = Object.keys(objective.incidencias).map((key, index) => {
+          return (
+            <Inputs
+              key={index}
+              type="date"
+              name={key}
+              label={"Incidencia" + (index)}
+              value={objective.incidencias[key]}
+              onChange={handleIncidenciaChange}
+            />
+          );
+        });
+        setInputList(inputIncidenciasList);
       };
       getObjective();
     }
@@ -50,7 +63,6 @@ function useEditObjectiveViewModel() {
           name={"incidencia" + inputList.length}
           label={"Incidencia " + inputList.length}
           onChange={handleIncidenciaChange}
-          onlyread={true}
         />
       )
     );
@@ -58,10 +70,12 @@ function useEditObjectiveViewModel() {
   
 
   const onRemoveBtnClick = () => {
-    const newInputList = inputList.slice(0, inputList.length - 1);
-    setInputList(newInputList);
+    if (inputList.length > 1) {
+      const newInputList = inputList.slice(0, inputList.length - 1);
+      setInputList(newInputList);
+    }
   };
-
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     const newModel = { ...model, [name]: value };
@@ -69,13 +83,30 @@ function useEditObjectiveViewModel() {
     editViewModel.setNewObjective(newModel);
   };
 
-  const handleIncidenciaChange = (e) => {
-    const { name, value } = e.target;
-    const newIncidencia = { ...model.incidencias, [name]: value };
-    const newModel = { ...model, incidencias: newIncidencia };
-    setIncidencias(newIncidencia);
-    setModel(newModel);
-  };
+const handleIncidenciaChange = (e) => {
+  const { name, value } = e.target;
+  const newIncidencia = { ...model.incidencias, [name]: value };
+  setIncidencias(newIncidencia);
+  setModel((prevModel) => ({ ...prevModel, incidencias: newIncidencia }));
+
+  const newInputList = Object.keys(newIncidencia).map((key, index) => {
+    return (
+      <Inputs
+        key={index}
+        type="date"
+        name={key}
+        label={"Incidencia " + (index)}
+        value={newIncidencia[key]}
+        onChange={handleIncidenciaChange}
+      />
+    );
+  });
+  setInputList(newInputList);
+};
+
+  
+  
+  
 
   //handle submit post the data to the API using  axios
   const handleSubmit = async (e) => {
@@ -87,7 +118,7 @@ function useEditObjectiveViewModel() {
     const index = objectives.indexOf(objective);
     objectives.splice(index, 1, model);
     localStorage.setItem("objectives", JSON.stringify(objectives));
-    
+
     navigate("/");
   };
 
@@ -100,6 +131,7 @@ function useEditObjectiveViewModel() {
     onRemoveBtnClick,
     inputList,
     incidenciasList,
+    
   };
 }
 

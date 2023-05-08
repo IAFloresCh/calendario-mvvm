@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 function Card({ model, final}) {
   console.log("final desde card" + final.toLocaleDateString());
+  console.log("INCIDENCIAS" + model.incidencias);
   return (
     <div key={model.id} className="card">
       <h2>{model.name}</h2>
@@ -42,6 +43,13 @@ function Card({ model, final}) {
           <span>Fecha de inicio:</span>
           <span>{model.fechaInicio}</span>
         </div>
+      {Object.values(model.incidencias).map((value, index) => {
+        return <div className="card-row">
+          <span>Incidencia {index}:</span>
+          <span>{value}</span>
+        </div>
+      })
+      }
         <div className="card-row">
           <span>Fecha de fin:</span>
           <span>{final.toLocaleDateString()}</span>

@@ -2,6 +2,53 @@
   text-align: center;
 }
 
+fieldset{
+  background: #f6f8ff; border: 2px solid #4238ca;
+}
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  width: 300px;
+  height: auto;
+  margin: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.card h2 {
+  margin: 0;
+  padding: 10px;
+  background-color: #0077cc;
+  color: #fff;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  height: 100%;
+}
+
+.card-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.card-row span:first-child {
+  font-weight: bold;
+}
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
-function Inputs({type, onChange}){
+function Inputs({type, name, label, onChange, value}){
 
-
-    const [time, setTime] = useState('');
     return(
         <div>
-            <input type={type} time={time}  onChange={onChange} />
-            {time}
+            <label>{label + ": "}
+            <input type={type}  name={name} value={value}  onChange={onChange} required={true} min={0}/>
+            </label>
         </div>
     );
 }

@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from "react";
-import Festivo from "../models/Festivos";
+import React from "react";
+import Objectives from "./Objectives";
+import { useHomeViewModel } from "../viewmodels/HomeViewModel";
 
-function Home({ date, festivos }) {
-    console.log(festivos);
-    
-    return (
-        <div>
-            <h2>Home</h2>
-            {date}<br />
-            {festivos.map((festivo) => (
-                <div key={festivo.id}>
-                    {festivo.date} - {festivo.name}
-                </div>
+function Home() {
+  const {date, models, fechasFinales} = useHomeViewModel();
+  console.log("log desde Home.js");
+  console.log(fechasFinales);
 
-
-            ))}
-
-
-        </div>
-    );
+  return (
+    <div>
+      <h2>Home</h2>
+      <h1>{date}</h1>
+      <h2>Objectives</h2>
+      <div className="cards-container">
+        <Objectives models={models} fechasFinales={fechasFinales}/>
+      </div>
+    </div>
+  );
 }
 export default Home;

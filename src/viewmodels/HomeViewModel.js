@@ -1,32 +1,72 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import ObjectiveModel from "../models/ObjectiveModel";
+import calcularFechaFinal from "./calcularFechaFinal";
 
-function HomeViewModel() {
-    const [date, setDate] = useState('');
+function useHomeViewModel() {
+  const [date, setDate] = useState("");
 
-    const urlBase = 'http://127.0.0.1:8080/festivos';
-    const [festivos, setFestivos] = useState([]);
+  const [models, setModels] = useState([]);
+  const [model, setModel] = useState(new ObjectiveModel());
+  const homeViewModel = new ObjectiveModel(model);
 
-    // useEffect to get a current date and time
-    useEffect(() => {
-        const now = new Date();
-        setDate(now.toLocaleDateString());
-    }, []);
+  const urlBaseFestivos = "http://127.0.0.1:8080/festivos";
+  const urlBaseObjectives = "http://127.0.0.1:8080/objectives";
+  //const urlBase = 'https://api.generadordni.es/v2/holidays/holidays?country=ES&year=';
+  //const thisYear = new Date().getFullYear();
+  const [festivos, setFestivos] = useState([]);
+  const [fechasFinales, setFechasFinales] = useState([]);
 
-    // get data once from API using axios
-    useEffect(() => {
-        const getFestivos = async () => {
-            const response = await axios.get(urlBase);
-            setFestivos(response.data.festivos);
-        }
-        getFestivos();
-    }, []);
+  // useEffect to get a current date
+  useEffect(() => {
+    const now = new Date();
+    setDate(now.toLocaleDateString());
+  }, [date]);
 
-
-    return {
-        date,
-        festivos,
+  // get data festivos from API using axios
+  useEffect(() => {
+    const getFestivos = async () => {
+      const response = await axios.get(urlBaseFestivos /*+ thisYear*/);
+      setFestivos(JSON.stringify(response.data.festivos));
+      localStorage.setItem("festivos", JSON.stringify(response.data.festivos));
+      console.log(response.data.festivos);
     };
+    getFestivos();
+  }, []);
+
+  // get data objectives from API using axios
+  useEffect(() => {
+    const getObjectives = async () => {
+      const response = await axios.get(urlBaseObjectives);
+      setModels(response.data.objectives);
+      console.log(response.data.objectives);
+    };
+    getObjectives();
+  }, []);
+
+  //iterar calcularFechaFinal() para cada objetivo
+
+  useEffect(() => {
+    const fechasFinales = models.map((model) => {
+      return calcularFechaFinal(model);
+    });
+    setFechasFinales(fechasFinales);
+  }, [models]);
+
+  useEffect(() => {
+    console.log("finales" + JSON.stringify(fechasFinales));
+  }, [fechasFinales]);
+
+  
+
+  return {
+    date,
+    models,
+    festivos,
+    homeViewModel,
+    fechasFinales,
+  };
 }
 
-export default HomeViewModel;
+export { useHomeViewModel };

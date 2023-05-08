@@ -32,19 +32,6 @@ function useEditObjectiveViewModel() {
         const objective = objectives.find((objective) => objective.id === params.id);
         setModel(objective);
         setIncidencias(objective.incidencias); 
-        const inputIncidenciasList = Object.keys(objective.incidencias).map((key, index) => {
-          return (
-            <Inputs
-              key={index}
-              type="date"
-              name={key}
-              label={"Incidencia" + (index)}
-              value={objective.incidencias[key]}
-              onChange={handleIncidenciaChange}
-            />
-          );
-        });
-        setInputList(inputIncidenciasList);
       };
       getObjective();
     }
@@ -70,11 +57,16 @@ function useEditObjectiveViewModel() {
   
 
   const onRemoveBtnClick = () => {
-    if (inputList.length > 1) {
-      const newInputList = inputList.slice(0, inputList.length - 1);
-      setInputList(newInputList);
-    }
+    const newInputList = inputList.slice(0, inputList.length - 1);
+    const newIncidencias = { ...model.incidencias };
+    delete newIncidencias[`incidencia${newInputList.length}`];
+    setInputList(newInputList);
+    setIncidencias(newIncidencias);
   };
+  
+  
+
+  
   
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -88,20 +80,7 @@ const handleIncidenciaChange = (e) => {
   const newIncidencia = { ...model.incidencias, [name]: value };
   setIncidencias(newIncidencia);
   setModel((prevModel) => ({ ...prevModel, incidencias: newIncidencia }));
-
-  const newInputList = Object.keys(newIncidencia).map((key, index) => {
-    return (
-      <Inputs
-        key={index}
-        type="date"
-        name={key}
-        label={"Incidencia " + (index)}
-        value={newIncidencia[key]}
-        onChange={handleIncidenciaChange}
-      />
-    );
-  });
-  setInputList(newInputList);
+  
 };
 
   

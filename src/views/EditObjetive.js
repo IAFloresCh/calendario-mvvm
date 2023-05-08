@@ -27,6 +27,10 @@ function EditObjective() {
         <Inputs type="number" name={"domingo"} label={lt[9]}  onChange={handleChange} value={model.domingo} />
         <Inputs type="date" name={"fechaInicio"} label={lt[10]}  onChange={handleChange} value={model.fechaInicio} />
         </fieldset>
+        <fieldset >
+        {incidenciasList}
+          </fieldset>
+        <label>Tienes pensado algun dia libre o alguna incidencia?</label>
         <button type="button" onClick={onAddBtnClick} >Añadir Incidencia</button>
         <button type="button" onClick={onRemoveBtnClick} >Eliminar Incidencia</button>
         <fieldset >

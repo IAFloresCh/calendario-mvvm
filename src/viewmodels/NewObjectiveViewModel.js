@@ -13,6 +13,7 @@ function useNewObjectiveViewModel() {
   const viewModel = new ObjectiveModel(model);
   const [inputList, setInputList] = useState([]);
   const [incidencias, setIncidencias] = useState([]);
+  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
 
   //add new input
   const onAddBtnClick = () => {
@@ -64,11 +65,9 @@ function useNewObjectiveViewModel() {
       const objectives = localStorage.getItem("objectives") ? JSON.parse(localStorage.getItem("objectives")) : [] ;
       objectives.push(model);
       localStorage.setItem("objectives", JSON.stringify(objectives));
-      
-
-
-      navigate("/");
+          navigate("/");
     }
+
 
   };
 
@@ -80,6 +79,7 @@ function useNewObjectiveViewModel() {
     inputList,
     onAddBtnClick,
     onRemoveBtnClick,
+    date,
     
   };
 }

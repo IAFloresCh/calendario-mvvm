@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import ObjectiveModel from "../models/ObjectiveModel";
 import calcularFechaFinal from "./calcularFechaFinal";
+import calcularPercentage from "./calcularPercentage";
 
 function useHomeViewModel() {
   const [date, setDate] = useState("");
@@ -17,6 +18,7 @@ function useHomeViewModel() {
   //const thisYear = new Date().getFullYear();
   const [festivos, setFestivos] = useState([]);
   const [fechasFinales, setFechasFinales] = useState([]);
+  const [porcentajes, setPorcentajes] = useState([]);
 
   // useEffect to get a current date
   useEffect(() => {
@@ -57,6 +59,13 @@ function useHomeViewModel() {
   }, [models]);
 
   useEffect(() => {
+
+    setModels(prevModels => prevModels.map(model =>({ ...model, percentage: calcularPercentage(model)})));
+
+  }, []);
+
+
+  useEffect(() => {
     console.log("finales" + JSON.stringify(fechasFinales));
   }, [fechasFinales]);
 
@@ -68,6 +77,7 @@ function useHomeViewModel() {
     festivos,
     homeViewModel,
     fechasFinales,
+    porcentajes,
   };
 }
 

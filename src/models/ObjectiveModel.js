@@ -13,6 +13,7 @@ export default class ObjectiveModel {
       this.totalHoras = 0;
       this.fechaInicio = '';
       this.incidencias = [];
+      this.percentage = 0;
     }
 
     setNewObjective = (model) => {
@@ -28,7 +29,8 @@ export default class ObjectiveModel {
       this.domingo = model.domingo;
       this.totalHoras = model.totalHoras;
       this.fechaInicio = model.fechaInicio;
-      this.incidencias = model.incidencias;      
+      this.incidencias = model.incidencias;    
+      this.percentage = model.percentage;  
     };
   }
   

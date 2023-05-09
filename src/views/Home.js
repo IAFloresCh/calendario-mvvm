@@ -6,6 +6,7 @@ function Home() {
   const {date, models, fechasFinales} = useHomeViewModel();
   console.log("log desde Home.js");
   console.log(fechasFinales);
+  
 
   return (
     <div>
@@ -13,7 +14,7 @@ function Home() {
       <h1>{date}</h1>
       <h2>Objectives</h2>
       <div className="cards-container">
-        <Objectives models={models} fechasFinales={fechasFinales}/>
+        <Objectives models={models} fechasFinales={fechasFinales} />
       </div>
     </div>
   );

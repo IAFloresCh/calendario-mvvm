@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Card({ model, final}) {
+function Card({ model, final,percentage}) {
   console.log("final desde card" + final.toLocaleDateString());
   console.log("INCIDENCIAS" + model.incidencias);
   return (
@@ -53,6 +53,11 @@ function Card({ model, final}) {
         <div className="card-row">
           <span>Fecha de fin:</span>
           <span>{final.toLocaleDateString()}</span>
+        </div>
+
+        <div className="card-row">
+          <span>Percentage:</span>
+          <span>{percentage} %</span>
         </div>
         <Link to={"/" }>
           <button>Atras</button>

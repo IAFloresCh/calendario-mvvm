@@ -13,7 +13,6 @@ function useNewObjectiveViewModel() {
   const viewModel = new ObjectiveModel(model);
   const [inputList, setInputList] = useState([]);
   const [incidencias, setIncidencias] = useState([]);
-  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
 
   //add new input
   const onAddBtnClick = () => {
@@ -79,7 +78,7 @@ function useNewObjectiveViewModel() {
     inputList,
     onAddBtnClick,
     onRemoveBtnClick,
-    date,
+    
     
   };
 }

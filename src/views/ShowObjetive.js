@@ -3,7 +3,7 @@ import { useShowObjectiveViewModel } from "../viewmodels/ShowObjectiveViewModel"
 
 
 function ShowObjetive() {
-  const {model,final,percentage} = useShowObjectiveViewModel();
+  const {model,final} = useShowObjectiveViewModel();
   console.log("final desde show" + final);
   console.log("log desde show objective" + model);
  
@@ -12,7 +12,7 @@ function ShowObjetive() {
 
       <h2>Show Objective</h2>
       <div className="cards-container">
-      <Card model={model} final={final} percentage={percentage} />     
+      <Card model={model} final={final} />     
       </div>
 
 

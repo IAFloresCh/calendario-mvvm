@@ -3,14 +3,12 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import ObjectiveModel from "../models/ObjectiveModel";
 import calcularFechaFinal from "./calcularFechaFinal";
-import calcularPercentage from "./calcularPercentage";
+
 
 function useShowObjectiveViewModel() {
   const [model, setModel] = useState(new ObjectiveModel());
   const params = useParams();
   const [final, setFinal] = useState(new Date());
-  const [percentage, setPercentage] = useState(0);
-
 
 
   let path = window.location.pathname;
@@ -38,8 +36,6 @@ function useShowObjectiveViewModel() {
   useEffect(() => {
     const fechaFinal = calcularFechaFinal(model);
     setFinal(fechaFinal);
-    const porcentaje = calcularPercentage(model, final);
-    setPercentage(porcentaje);
   }, [model]);
 
   useEffect(() => {
@@ -51,7 +47,6 @@ function useShowObjectiveViewModel() {
     model,
     showViewModel,
     final,
-    percentage,
   };
 }
 

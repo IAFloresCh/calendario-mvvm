@@ -3,11 +3,8 @@ import Inputs from "./Inputs";
 import { useNewObjectiveViewModel } from "../viewmodels/NewObjectiveViewModel";
 
 function NewObjective() {
-  const { onAddBtnClick, inputList, handleChange, handleSubmit,onRemoveBtnClick, date} = useNewObjectiveViewModel();
+  const { onAddBtnClick, inputList, handleChange, handleSubmit,onRemoveBtnClick} = useNewObjectiveViewModel();
   const lt = ['Introduce tu nombre',"Introduce una descripción", "Introduce el total de horas", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", "Fecha de inicio"];
-
-
-  console.log("log desde NewObjective.js" + date);
   return (
     <div>
       <h2>New Objective</h2>
@@ -25,7 +22,7 @@ function NewObjective() {
         <Inputs type="number" name={"viernes"} label={lt[7]}  onChange={handleChange} />
         <Inputs type="number" name={"sabado"} label={lt[8]}  onChange={handleChange} />
         <Inputs type="number" name={"domingo"} label={lt[9]}  onChange={handleChange} />
-        <Inputs type="date" name={"fechaInicio"} label={lt[10]}  onChange={handleChange} value={date}/>
+        <Inputs type="date" name={"fechaInicio"} label={lt[10]}  onChange={handleChange} />
         </fieldset>
         <fieldset >
         <label>Tienes pensado algun dia libre o alguna incidencia?</label>

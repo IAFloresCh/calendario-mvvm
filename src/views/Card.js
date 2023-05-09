@@ -54,11 +54,6 @@ function Card({ model, final,percentage}) {
           <span>Fecha de fin:</span>
           <span>{final.toLocaleDateString()}</span>
         </div>
-
-        <div className="card-row">
-          <span>Percentage:</span>
-          <span>{percentage} %</span>
-        </div>
         <Link to={"/" }>
           <button>Atras</button>
         </Link>
